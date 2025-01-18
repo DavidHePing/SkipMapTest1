@@ -7,7 +7,7 @@ import (
 	"github.com/zhangyunhao116/skipmap"
 )
 
-func SkipMap_test2() {
+func SkipMap_test_delete() {
 	m0 := skipmap.NewString[int]()
 
 	for _, v := range []int{10, 12, 15} {
