@@ -18,4 +18,9 @@ func SkipMap_test1() {
 	if ok {
 		fmt.Println("skipmap load 10 with value ", v)
 	}
+
+	_, ok = m0.Load("11")
+	if !ok {
+		fmt.Println("11 is not in skipmap")
+	}
 }
