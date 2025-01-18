@@ -3,6 +3,7 @@ package main
 import (
 	"strconv"
 	"sync"
+	"time"
 
 	"github.com/zhangyunhao116/skipmap"
 )
@@ -17,6 +18,7 @@ func SkipMap_test_concurrent1() {
 		tmp := i
 		go func() {
 			defer wg.Done()
+			time.Sleep(100 * time.Millisecond)
 			m.Store(strconv.Itoa(tmp%10), tmp)
 		}()
 	}
