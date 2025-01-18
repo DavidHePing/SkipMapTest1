@@ -1,7 +1,6 @@
 package main
 
 import (
-	"strconv"
 	"sync"
 	"time"
 
@@ -9,7 +8,7 @@ import (
 )
 
 func SkipMap_test_concurrent1() {
-	m := skipmap.NewString[int]()
+	m := skipmap.NewFunc[int, int](func(a, b int) bool { return a > b })
 
 	var wg sync.WaitGroup
 	wg.Add(1000)
@@ -19,13 +18,13 @@ func SkipMap_test_concurrent1() {
 		go func() {
 			defer wg.Done()
 			time.Sleep(100 * time.Millisecond)
-			m.Store(strconv.Itoa(tmp%10), tmp)
+			m.Store(tmp%10, tmp)
 		}()
 	}
 
 	wg.Wait()
 
-	m.Range(func(key string, value int) bool {
+	m.Range(func(key int, value int) bool {
 		println("key:", key, "value:", value)
 		return true
 	})
