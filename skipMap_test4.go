@@ -9,6 +9,7 @@ import (
 
 func SkipMap_test_concurrent1() {
 	m := skipmap.NewFunc[int, int](func(a, b int) bool { return a > b })
+	// m := skipmap.NewInt[int]()
 
 	var wg sync.WaitGroup
 	wg.Add(1000)
